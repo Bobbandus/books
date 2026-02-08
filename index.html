@@ -3,125 +3,301 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minecraft Bedrock Realm</title>
+    <title>Bedrock SMP Realm</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: rgba(40, 40, 40, 0.7);
+            --accent-green: #43b581;
+            --accent-discord: #5865F2;
+            --text-main: #ffffff;
+            --text-secondary: #b9bbbe;
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e1e2f 0%, #0a0a0a 100%);
+            color: var(--text-main);
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
             padding: 20px;
-            text-align: center;
+            overflow-x: hidden;
+        }
+
+        /* Bakgrundseffekter (flytande kuber) */
+        .background-shapes div {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            z-index: -1;
+            animation: float 10s infinite ease-in-out;
+        }
+        .shape1 { top: 10%; left: 10%; animation-delay: 0s; }
+        .shape2 { bottom: 20%; right: 10%; width: 100px; height: 100px; animation-delay: 2s; }
+        .shape3 { top: 40%; right: 30%; animation-delay: 4s; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0) rotate(0deg); }
         }
 
         .container {
-            max-width: 400px;
             width: 100%;
-            background-color: #2d2d2d;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            max-width: 480px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #ffffff;
+            font-family: 'VT323', monospace;
+            font-size: 42px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-green);
+            text-shadow: 2px 2px 0px #000;
         }
 
-        p {
-            margin-bottom: 15px;
-            line-height: 1.5;
+        .tagline {
+            color: var(--text-secondary);
             font-size: 16px;
+            margin-bottom: 30px;
+            font-weight: 500;
         }
 
-        .info-box {
-            background-color: #383838;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
+        .status-badge {
+            display: inline-block;
+            background: rgba(67, 181, 129, 0.2);
+            color: var(--accent-green);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            border: 1px solid rgba(67, 181, 129, 0.3);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
             text-align: left;
-            font-size: 14px;
         }
 
-        .info-box strong {
+        .info-item {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .info-item h3 {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .info-item p {
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* Kod-sektionen */
+        .code-container {
+            position: relative;
+            background: #000;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .code-container:hover {
+            border-color: var(--accent-green);
+        }
+
+        .code-text {
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
             color: #fff;
         }
 
-        .code-display {
-            font-family: monospace;
-            font-size: 18px;
-            background-color: #000;
-            padding: 10px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            margin: 10px 0 20px 0;
-            word-break: break-all;
-            color: #0f0;
+        .copy-icon {
+            color: var(--text-secondary);
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        /* Knappar */
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .btn {
-            display: block;
-            width: 100%;
-            padding: 15px 0;
-            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            border-radius: 8px;
             text-decoration: none;
-            color: white;
             font-weight: bold;
-            border-radius: 5px;
-            transition: opacity 0.2s;
-            box-sizing: border-box;
+            font-size: 16px;
+            transition: transform 0.2s, filter 0.2s;
+            position: relative;
+            overflow: hidden;
         }
 
         .btn:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            filter: brightness(1.1);
         }
 
-        .realm-btn {
-            background-color: #388e3c; /* Minecraft Green */
+        .btn:active {
+            transform: translateY(0);
         }
 
-        .discord-btn {
-            background-color: #5865F2; /* Discord Blurple */
+        .btn-discord {
+            background-color: var(--accent-discord);
+            color: white;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
         }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #888;
+        .btn-realm {
+            background-color: transparent;
+            border: 2px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+        
+        .btn-realm:hover {
+            background-color: rgba(67, 181, 129, 0.1);
+        }
+
+        /* Toast meddelande */
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 12px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-bottom: 3px solid var(--accent-green);
+        }
+
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        @media (max-width: 400px) {
+            h1 { font-size: 32px; }
+            .info-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Minecraft Bedrock Realm</h1>
-        
-        <p>Söker aktiva spelare. Alla plattformar (Konsol, PC, Mobil) är välkomna.</p>
+    <div class="background-shapes">
+        <div class="shape1"></div>
+        <div class="shape2"></div>
+        <div class="shape3"></div>
+    </div>
 
-        <div class="info-box">
-            <strong>Process:</strong><br>
-            Du startar som "Visitor" (Besökare). Gå med i Discord för att bli verifierad och få byggrättigheter.
-            <br><br>
-            <strong>Regler:</strong><br>
-            Inga strikta regler, men ingen onödig griefing.
+    <div class="container">
+        <div class="status-badge">🟢 ONLINE & ACTIVE</div>
+        <h1>BEDROCK SMP</h1>
+        <p class="tagline">PC • CONSOLE • MOBILE</p>
+
+        <div class="info-grid">
+            <div class="info-item">
+                <h3>Verifiering</h3>
+                <p>Visitor ➔ Verified</p>
+            </div>
+            <div class="info-item">
+                <h3>Regler</h3>
+                <p>No Griefing</p>
+            </div>
         </div>
 
-        <p>Realm-kod:</p>
-        <div class="code-display">zpshUgAC-MSkfY4</div>
+        <p style="margin-bottom: 8px; color: #888; font-size: 14px;">Realm Code (Tryck för att kopiera)</p>
+        <div class="code-container" onclick="copyCode()">
+            <span class="code-text" id="realmCode">zpshUgAC-MSkfY4</span>
+            <span class="copy-icon" id="copyLabel">KOPIERA</span>
+        </div>
 
-        <a href="https://realms.gg/zpshUgAC-MSkfY4" class="btn realm-btn">Öppna Minecraft Realm</a>
-        <a href="https://discord.gg/DBtx7muMvt" class="btn discord-btn">Gå med i Discord</a>
-        
-        <div class="footer">
-            Kräver Minecraft Bedrock Edition
+        <div class="btn-group">
+            <a href="https://discord.gg/DBtx7muMvt" class="btn btn-discord">
+                GÅ MED I DISCORD
+            </a>
+            <a href="https://realms.gg/zpshUgAC-MSkfY4" class="btn btn-realm">
+                ÖPPNA MINECRAFT
+            </a>
         </div>
     </div>
 
+    <div id="toast">Koden kopierad till urklipp!</div>
+
+    <script>
+        function copyCode() {
+            const codeText = document.getElementById("realmCode").innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                showToast();
+                document.getElementById("copyLabel").innerText = "KOPIERAD!";
+                setTimeout(() => {
+                    document.getElementById("copyLabel").innerText = "KOPIERA";
+                }, 2000);
+            }).catch(err => {
+                console.error('Kunde inte kopiera text: ', err);
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+    </script>
 </body>
 </html>
