@@ -3,300 +3,481 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bedrock SMP Realm</title>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <title>Bedrock SMP | Officiell Hemsida</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* --- CSS VARIABLER & RESET --- */
         :root {
-            --bg-color: #121212;
-            --card-bg: rgba(40, 40, 40, 0.7);
-            --accent-green: #43b581;
-            --accent-discord: #5865F2;
-            --text-main: #ffffff;
-            --text-secondary: #b9bbbe;
-            --border-radius: 12px;
+            --primary: #43b581; /* Minecraft Green */
+            --primary-dark: #2d7d58;
+            --accent: #5865F2; /* Discord Blurple */
+            --bg-dark: #121212;
+            --bg-card: #1e1e1e;
+            --text-light: #f0f0f0;
+            --text-gray: #a0a0a0;
+            --danger: #ed4245;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e1e2f 0%, #0a0a0a 100%);
-            color: var(--text-main);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Bakgrundseffekter (flytande kuber) */
-        .background-shapes div {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.03);
-            width: 60px;
-            height: 60px;
-            border-radius: 4px;
-            z-index: -1;
-            animation: float 10s infinite ease-in-out;
-        }
-        .shape1 { top: 10%; left: 10%; animation-delay: 0s; }
-        .shape2 { bottom: 20%; right: 10%; width: 100px; height: 100px; animation-delay: 2s; }
-        .shape3 { top: 40%; right: 30%; animation-delay: 4s; }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(10deg); }
-            100% { transform: translateY(0) rotate(0deg); }
-        }
-
-        .container {
+        /* --- NAVIGATION --- */
+        nav {
+            background: rgba(18, 18, 18, 0.95);
+            padding: 1rem 2rem;
+            position: fixed;
             width: 100%;
-            max-width: 480px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: var(--border-radius);
-            padding: 40px 30px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            text-align: center;
-            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-family: 'VT323', monospace;
-            font-size: 42px;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent-green);
-            text-shadow: 2px 2px 0px #000;
-        }
-
-        .tagline {
-            color: var(--text-secondary);
-            font-size: 16px;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-
-        .status-badge {
-            display: inline-block;
-            background: rgba(67, 181, 129, 0.2);
-            color: var(--accent-green);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 25px;
-            border: 1px solid rgba(67, 181, 129, 0.3);
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 30px;
-            text-align: left;
-        }
-
-        .info-item {
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 8px;
-        }
-
-        .info-item h3 {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .info-item p {
-            font-size: 15px;
-            font-weight: 600;
-        }
-
-        /* Kod-sektionen */
-        .code-container {
-            position: relative;
-            background: #000;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            margin-bottom: 30px;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            transition: border-color 0.2s;
+            backdrop-filter: blur(10px);
         }
 
-        .code-container:hover {
-            border-color: var(--accent-green);
-        }
-
-        .code-text {
-            font-family: 'Courier New', monospace;
-            font-size: 18px;
-            font-weight: bold;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
             letter-spacing: 1px;
-            color: #fff;
+            cursor: pointer;
         }
 
-        .copy-icon {
-            color: var(--text-secondary);
-            font-size: 14px;
-            text-transform: uppercase;
-            font-weight: bold;
-        }
-
-        /* Knappar */
-        .btn-group {
+        .nav-links {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu (Mobile) */
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- CONTENT SECTIONS --- */
+        .page-section {
+            display: none; /* Hide all pages by default */
+            padding: 100px 20px 60px;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .page-section.active {
+            display: block; /* Show active page */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HERO (HOME) --- */
+        .hero-content {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(to right, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
+            padding: 15px 30px;
             border-radius: 8px;
+            font-weight: 700;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 16px;
-            transition: transform 0.2s, filter 0.2s;
-            position: relative;
-            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-
-        .btn:active {
-            transform: translateY(0);
+        .btn-primary {
+            background-color: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(67, 181, 129, 0.4);
         }
 
         .btn-discord {
-            background-color: var(--accent-discord);
-            color: white;
+            background-color: var(--accent);
+            color: #fff;
             box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
         }
 
-        .btn-realm {
-            background-color: transparent;
-            border: 2px solid var(--accent-green);
-            color: var(--accent-green);
-        }
-        
-        .btn-realm:hover {
-            background-color: rgba(67, 181, 129, 0.1);
+        .btn:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
         }
 
-        /* Toast meddelande */
-        #toast {
-            visibility: hidden;
-            min-width: 200px;
-            background-color: #333;
-            color: #fff;
+        /* --- CARDS & GRID --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        /* --- INFO / CODE SECTION --- */
+        .code-box {
+            background: #000;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.5rem;
             text-align: center;
-            border-radius: 4px;
-            padding: 12px;
-            position: fixed;
-            z-index: 1;
-            bottom: 30px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            border-bottom: 3px solid var(--accent-green);
+            margin: 20px 0;
+            border: 1px solid #333;
+            color: var(--primary);
+            position: relative;
+            cursor: pointer;
         }
 
-        #toast.show {
-            visibility: visible;
-            opacity: 1;
+        .copy-hint {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            display: block;
+            margin-top: 10px;
+            text-transform: uppercase;
+            font-family: sans-serif;
         }
 
-        @media (max-width: 400px) {
-            h1 { font-size: 32px; }
-            .info-grid { grid-template-columns: 1fr; }
+        .step-list {
+            list-style: none;
+            counter-reset: my-counter;
+        }
+
+        .step-list li {
+            counter-increment: my-counter;
+            margin-bottom: 20px;
+            padding-left: 50px;
+            position: relative;
+        }
+
+        .step-list li::before {
+            content: counter(my-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 35px;
+            height: 35px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+        }
+
+        /* --- RULES SECTION --- */
+        .rule-item {
+            background: var(--bg-card);
+            margin-bottom: 20px;
+            padding: 20px;
+            border-left: 4px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .rule-item.severe {
+            border-left-color: var(--danger);
+        }
+
+        .rule-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0px;
+                height: 100vh;
+                top: 70px;
+                background-color: var(--bg-card);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 50%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                padding-top: 50px;
+            }
+
+            .nav-links.nav-active {
+                transform: translateX(0%);
+            }
+
+            .burger {
+                display: block;
+            }
+
+            h1 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background-shapes">
-        <div class="shape1"></div>
-        <div class="shape2"></div>
-        <div class="shape3"></div>
-    </div>
+    <nav>
+        <div class="logo" onclick="showPage('home')">BEDROCK SMP</div>
+        <div class="nav-links" id="navLinks">
+            <a onclick="showPage('home')" class="active">Hem</a>
+            <a onclick="showPage('info')">Anslut</a>
+            <a onclick="showPage('rules')">Regler</a>
+            <a href="https://discord.gg/DBtx7muMvt" target="_blank">Discord</a>
+        </div>
+        <div class="burger" onclick="toggleNav()">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
 
-    <div class="container">
-        <div class="status-badge">🟢 ONLINE & ACTIVE</div>
-        <h1>BEDROCK SMP</h1>
-        <p class="tagline">PC • CONSOLE • MOBILE</p>
-
-        <div class="info-grid">
-            <div class="info-item">
-                <h3>Verifiering</h3>
-                <p>Visitor ➔ Verified</p>
+    <section id="home" class="page-section active">
+        <div class="hero-content">
+            <h1>SKAPA. ÖVERLEV.<br>DOMINERA.</h1>
+            <p class="hero-subtitle">En aktiv svensk Bedrock Realm för PC, Konsol och Mobil. Starta ditt äventyr idag.</p>
+            <div class="cta-buttons">
+                <button onclick="showPage('info')" class="btn btn-primary">Börja Spela</button>
+                <a href="https://discord.gg/DBtx7muMvt" class="btn btn-discord">Gå med i Discord</a>
             </div>
-            <div class="info-item">
-                <h3>Regler</h3>
-                <p>No Griefing</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="card">
+                <h3>🌍 Bedrock Edition</h3>
+                <p>Fullt stöd för Crossplay. Spela med vänner oavsett om de sitter på Xbox, PlayStation, Switch, PC eller Mobil.</p>
+            </div>
+            <div class="card">
+                <h3>🛡️ Anti-Grief</h3>
+                <p>Vi vill ha en bra stund. Vi har aktiva admins och backuper, men kräver att spelare visar respekt. Griefing tolereras ej.</p>
+            </div>
+            <div class="card">
+                <h3>🔒 Verifiering</h3>
+                <p>Alla startar som "Visitors". För att få bygga och interagera måste du verifiera dig i vår Discord. Detta håller hackers borta.</p>
             </div>
         </div>
+    </section>
 
-        <p style="margin-bottom: 8px; color: #888; font-size: 14px;">Realm Code (Tryck för att kopiera)</p>
-        <div class="code-container" onclick="copyCode()">
-            <span class="code-text" id="realmCode">zpshUgAC-MSkfY4</span>
-            <span class="copy-icon" id="copyLabel">KOPIERA</span>
+    <section id="info" class="page-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 30px; text-align: center;">Hur du ansluter</h2>
+        
+        <div style="max-width: 800px; margin: 0 auto;">
+            <ul class="step-list">
+                <li>
+                    <strong>Kopiera Realm-koden</strong><br>
+                    Tryck på boxen nedan för att kopiera koden direkt.
+                    <div class="code-box" onclick="copyCode()">
+                        zpshUgAC-MSkfY4
+                        <span class="copy-hint" id="copyMsg">Tryck för att kopiera</span>
+                    </div>
+                </li>
+                <li>
+                    <strong>Gå med i spelet</strong><br>
+                    Starta Minecraft -> Spela -> Vänner -> Gå med i Realm. Klistra in koden.
+                </li>
+                <li>
+                    <strong>VIKTIGT: Verifiera dig!</strong><br>
+                    När du kommer in är du i "Visitor Mode" (du kan inte hugga block). Gå in på Discorden och skriv ditt namn i verifieringskanalen för att få full tillgång.
+                </li>
+            </ul>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://realms.gg/zpshUgAC-MSkfY4" class="btn btn-primary">Öppna Minecraft Direkt (Länk)</a>
+            </div>
         </div>
+    </section>
 
-        <div class="btn-group">
-            <a href="https://discord.gg/DBtx7muMvt" class="btn btn-discord">
-                GÅ MED I DISCORD
-            </a>
-            <a href="https://realms.gg/zpshUgAC-MSkfY4" class="btn btn-realm">
-                ÖPPNA MINECRAFT
-            </a>
+    <section id="rules" class="page-section">
+        <h2 style="font-size: 2.5rem; margin-bottom: 10px; text-align: center;">Serverns Regler</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 40px;">Sunt förnuft räcker långt. Bryter du mot dessa blir du bannad.</p>
+
+        <div style="max-width: 800px; margin: 0 auto;">
+            <div class="rule-item severe">
+                <span class="rule-title">1. Ingen Hacking eller Duping</span>
+                X-ray, fly hacks, auto-clickers eller att duplicera items är strikt förbjudet. Vi vill ha en rättvis ekonomi.
+            </div>
+
+            <div class="rule-item severe">
+                <span class="rule-title">2. Ingen "Onödig" Griefing</span>
+                Att stjäla lite är en del av spelet. Att spränga någons bas till grunden med TNT eller fylla den med lava (lava casting) är <strong>inte</strong> tillåtet. Förstör inte kartan.
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-title">3. PvP Regler</span>
+                Döda inte nya spelare ("spawn killing"). PvP är tillåtet om båda parter är med på det eller om det sker i krigszoner (om sådana finns). Var inte giftig i chatten efter en fight.
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-title">4. Respekt i Chatten</span>
+                Ingen rasism, sexism eller grova påhopp. Vi är här för att ha kul, inte för att bråka i textchatten.
+            </div>
+
+            <div class="rule-item">
+                <span class="rule-title">5. Lagganläggningar</span>
+                Bygg inte medvetna "lag machines". Stora redstone-farmar ska stängas av när de inte används för att realmens prestanda ska hållas uppe.
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div id="toast">Koden kopierad till urklipp!</div>
+    <footer>
+        <p>&copy; 2024 Bedrock SMP Realm. Ej associerad med Mojang eller Microsoft.</p>
+    </footer>
 
     <script>
-        function copyCode() {
-            const codeText = document.getElementById("realmCode").innerText;
-            navigator.clipboard.writeText(codeText).then(() => {
-                showToast();
-                document.getElementById("copyLabel").innerText = "KOPIERAD!";
-                setTimeout(() => {
-                    document.getElementById("copyLabel").innerText = "KOPIERA";
-                }, 2000);
-            }).catch(err => {
-                console.error('Kunde inte kopiera text: ', err);
+        // Funktion för att byta sida (Tabbar)
+        function showPage(pageId) {
+            // Dölj alla sektioner
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
             });
+
+            // Ta bort active från menylänkar
+            const navLinks = document.querySelectorAll('.nav-links a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Visa vald sektion
+            document.getElementById(pageId).classList.add('active');
+
+            // Stäng mobilmenyn om den är öppen
+            const nav = document.querySelector('.nav-links');
+            if (nav.classList.contains('nav-active')) {
+                toggleNav();
+            }
+
+            // Scrolla till toppen
+            window.scrollTo(0,0);
         }
 
-        function showToast() {
-            const toast = document.getElementById("toast");
-            toast.className = "show";
-            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        // Mobilmeny toggle
+        function toggleNav() {
+            const nav = document.querySelector('.nav-links');
+            nav.classList.toggle('nav-active');
+            
+            // Animera burger (valfritt, men snyggt)
+            const burger = document.querySelector('.burger');
+            burger.classList.toggle('toggle');
+        }
+
+        // Kopiera kod funktion
+        function copyCode() {
+            const code = "zpshUgAC-MSkfY4";
+            navigator.clipboard.writeText(code).then(() => {
+                const msg = document.getElementById('copyMsg');
+                const originalText = msg.innerText;
+                msg.innerText = "KOPIERAT!";
+                msg.style.color = "#43b581";
+                
+                setTimeout(() => {
+                    msg.innerText = originalText;
+                    msg.style.color = "#a0a0a0";
+                }, 2000);
+            });
         }
     </script>
 </body>
