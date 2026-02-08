@@ -1,78 +1,127 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <title>Svensk Minecraft Realm</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0f172a;
-      color: #e5e7eb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-    }
-    .card {
-      background: #020617;
-      padding: 24px;
-      border-radius: 16px;
-      max-width: 420px;
-      width: 100%;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      text-align: center;
-    }
-    h1 {
-      margin-top: 0;
-      font-size: 1.6rem;
-    }
-    p {
-      color: #cbd5f5;
-      line-height: 1.5;
-    }
-    .link {
-      display: block;
-      margin: 16px 0;
-      padding: 14px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-    .link.discord {
-      background: #5865F2;
-    }
-    .note {
-      margin-top: 16px;
-      font-size: 0.9rem;
-      color: #94a3b8;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Bedrock Realm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #2d2d2d;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .info-box {
+            background-color: #383838;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .info-box strong {
+            color: #fff;
+        }
+
+        .code-display {
+            font-family: monospace;
+            font-size: 18px;
+            background-color: #000;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            margin: 10px 0 20px 0;
+            word-break: break-all;
+            color: #0f0;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            margin-bottom: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: opacity 0.2s;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .realm-btn {
+            background-color: #388e3c; /* Minecraft Green */
+        }
+
+        .discord-btn {
+            background-color: #5865F2; /* Discord Blurple */
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>🎮 Svensk Minecraft Realm</h1>
-    <p>
-      Alla nya spelare joinar som <b>Visitor</b>.<br>
-      Var aktiv och schysst för att bli uppgraderad 😄
-    </p>
+    <div class="container">
+        <h1>Minecraft Bedrock Realm</h1>
+        
+        <p>Söker aktiva spelare. Alla plattformar (Konsol, PC, Mobil) är välkomna.</p>
 
-    <a class="link" href="https://realms.gg/zpshUgAC-MSkfY4" target="_blank">
-      🔑 Gå med i Realm
-    </a>
+        <div class="info-box">
+            <strong>Process:</strong><br>
+            Du startar som "Visitor" (Besökare). Gå med i Discord för att bli verifierad och få byggrättigheter.
+            <br><br>
+            <strong>Regler:</strong><br>
+            Inga strikta regler, men ingen onödig griefing.
+        </div>
 
-    <a class="link discord" href="https://discord.gg/DBtx7muMvt" target="_blank">
-      💬 Gå med i Discord
-    </a>
+        <p>Realm-kod:</p>
+        <div class="code-display">zpshUgAC-MSkfY4</div>
 
-    <div class="note">
-      PC & konsol • Svensk server • Aktiva spelare sökes
+        <a href="https://realms.gg/zpshUgAC-MSkfY4" class="btn realm-btn">Öppna Minecraft Realm</a>
+        <a href="https://discord.gg/DBtx7muMvt" class="btn discord-btn">Gå med i Discord</a>
+        
+        <div class="footer">
+            Kräver Minecraft Bedrock Edition
+        </div>
     </div>
-  </div>
 
 </body>
 </html>
